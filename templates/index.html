@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salary Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            color: #333;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        input[type="text"], input[type="number"], input[type="checkbox"] {
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        h2 {
+            margin-top: 20px;
+            color: #555;
+        }
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+        }
+    </style>
+</head>
+<body>
+    <h1>Salary Prediction</h1>
+    <form action="/predict" method="post">
+        <label for="experience">Enter Years of Experience:</label>
+        <input type="number" id="experience" name="experience" min="0" step="1" required>
+
+        <label for="age">Enter Age:</label>
+        <input type="text" id="age" name="age" required>
+
+        <label for="education">Select Education Level:</label>
+        <select id="education" name="education">
+            <option value="High School">High School</option>
+            <option value="Bachelor's">Bachelor's</option>
+            <option value="Master's">Master's</option>
+            <option value="PhD">PhD</option>
+        </select>
+
+        <label for="job_title">Select Job Title:</label>
+        <select id="job_title" name="job_title" required>
+            <option value="Software Engineer">Software Engineer</option>
+            <option value="Data Scientist">Data Scientist</option>
+            <option value="Project Manager">Project Manager</option>
+            <option value="DevOps Engineer">DevOps Engineer</option>
+            <option value="Business Analyst">Business Analyst</option>
+        </select>
+
+        <label for="gender">Select Gender:</label>
+        <select id="gender" name="gender">
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+        </select>
+
+        <label for="location">Work Location:</label>
+        <select id="location" name="location">
+            <option value="New York">New York</option>
+            <option value="San Francisco">San Francisco</option>
+            <option value="Remote">Remote</option>
+            <option value="Other">Other</option>
+        </select>
+
+        <label for="company_size">Company Size:</label>
+        <select id="company_size" name="company_size">
+            <option value="Small (<100 employees)">Small (&lt;100 employees)</option>
+            <option value="Medium (100-500 employees)">Medium (100-500 employees)</option>
+            <option value="Large (>500 employees)">Large (&gt;500 employees)</option>
+        </select>
+
+        <label for="industry">Select Industry:</label>
+        <select id="industry" name="industry">
+            <option value="Technology">Technology</option>
+            <option value="Healthcare">Healthcare</option>
+            <option value="Finance">Finance</option>
+            <option value="Education">Education</option>
+            <option value="Other">Other</option>
+        </select>
+
+        <!-- Skills Section with Checkboxes -->
+        <label>Select Skills:</label>
+        <div class="checkbox-group">
+            <label><input type="checkbox" name="skills" value="Python"> Python</label>
+            <label><input type="checkbox" name="skills" value="Machine Learning"> Machine Learning</label>
+            <label><input type="checkbox" name="skills" value="Data Analysis"> Data Analysis</label>
+            <label><input type="checkbox" name="skills" value="Cloud Computing"> Cloud Computing</label>
+            <label><input type="checkbox" name="skills" value="DevOps"> DevOps</label>
+        </div>
+
+        <label for="other_skills">Enter Other Skills (comma-separated):</label>
+        <input type="text" id="other_skills" name="other_skills" placeholder="e.g., Java, C++">
+
+        <!-- Certifications Section with Checkboxes -->
+        <label>Select Certifications:</label>
+        <div class="checkbox-group">
+            <label><input type="checkbox" name="certifications" value="AWS Certified"> AWS Certified</label>
+            <label><input type="checkbox" name="certifications" value="PMP"> PMP</label>
+            <label><input type="checkbox" name="certifications" value="Certified Scrum Master"> Certified Scrum Master</label>
+        </div>
+
+        <label for="other_certifications">Enter Other Certifications (comma-separated):</label>
+        <input type="text" id="other_certifications" name="other_certifications" placeholder="e.g., Azure Certified, Google Cloud Certified">
+
+        <label for="years_at_company">Years at Current Company:</label>
+        <select id="years_at_company" name="years_at_company" required>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
+
+        <label for="contract_type">Select Contract Type:</label>
+        <select id="contract_type" name="contract_type">
+            <option value="Full-time">Full-time</option>
+            <option value="Part-time">Part-time</option>
+            <option value="Freelance">Freelance</option>
+            <option value="Contract">Contract</option>
+        </select>
+
+        <!-- New Job Performance Rating field -->
+        <label for="performance_rating">Job Performance Rating (1-5):</label>
+        <input type="number" id="performance_rating" name="performance_rating" min="1" max="5" required>
+
+        <button type="submit">Predict Salary</button>
+    </form>
+    {% if prediction %}
+        <h2>Predicted Salary: {{ prediction }}</h2>
+    {% endif %}
+</body>
+</html>
